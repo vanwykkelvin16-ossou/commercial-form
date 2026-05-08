@@ -858,7 +858,49 @@
     background:var(--gray-200);
   }
 
-    /* Custom option text input */
+    /* Insurance Declaration question rows */
+    .decl-row {
+      display: flex;
+      align-items: center;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      gap: 12px;
+    }
+    .decl-row:last-child { border-bottom: none; }
+    .decl-row:first-child { border-radius: var(--r-sm) var(--r-sm) 0 0; }
+    .decl-rows-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .decl-row .decl-q {
+      flex: 1;
+      font-size: 8.5pt;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .decl-row .decl-sel {
+      flex: 0 0 auto;
+    }
+    .decl-row .decl-sel select {
+      padding: 5px 10px;
+      border: 1px solid var(--field-border);
+      border-radius: var(--r-sm);
+      font-size: 8.5pt;
+      background: var(--field-bg);
+      min-width: 80px;
+      cursor: pointer;
+    }
+    .decl-row .decl-sel select:focus {
+      outline: none;
+      border-color: var(--brand);
+      background: #fff;
+    }
+    .decl-row-alt { background: var(--gray-50, #f8f9fb); }
+
+        /* Custom option text input */
     .field .ctrl.has-custom {
       flex-direction: column;
       align-items: stretch;
@@ -1625,15 +1667,15 @@
   </div>
 
 <div class="banner">Insurance Declaration</div>
-  <div class="grid one">
-    <div class="field full"><div class="lbl">Have you or any driver(s) of the vehicle(s)/plant(s) ever been charged or convicted of any offence under the Road Traffic Act 93 of 1996 over the past 5 years?</div><div class="ctrl">
-      <select name="decl_traffic"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
-    <div class="field full"><div class="lbl">Have you or any driver(s) had any civil or criminal judgements or pending cases against you over the past 5 years?</div><div class="ctrl">
-      <select name="decl_civil"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
+  <div class="decl-rows-wrap">
+    <div class="decl-row">
+      <div class="decl-q">Have you or any driver(s) of the vehicle(s)/plant(s) ever been charged or convicted of any offence under the Road Traffic Act 93 of 1996 over the past 5 years?</div>
+      <div class="decl-sel"><select name="decl_traffic"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
+    <div class="decl-row decl-row-alt">
+      <div class="decl-q">Have you or any driver(s) had any civil or criminal judgements or pending cases against you over the past 5 years?</div>
+      <div class="decl-sel"><select name="decl_civil"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
   </div>
 
   <div class="grid" style="margin-top:6px">
@@ -1664,28 +1706,30 @@
   </div>
 
 <div class="banner">Has an insurer at any time</div>
-  <div class="grid">
-    <div class="field"><div class="lbl">Declined your insurance?</div><div class="ctrl">
-      <select name="ins_declined"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
-    <div class="field"><div class="lbl">Imposed special terms?</div><div class="ctrl">
-      <select name="ins_terms"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
-    <div class="field"><div class="lbl">Refused to renew your policy?</div><div class="ctrl">
-      <select name="ins_renew"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
-    <div class="field"><div class="lbl">Cancelled your policy?</div><div class="ctrl">
-      <select name="ins_cancel"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
-    <div class="field"><div class="lbl">Voided any policy?</div><div class="ctrl">
-      <select name="ins_void"><option value=""></option><option>No</option><option>Yes</option><option value="custom">Custom...</option>
-          </select>
-    </div></div>
-    <div class="field"><div class="lbl">If yes - reason</div><div class="ctrl"><input type="text" name="ins_reason"></div></div>
+  <div class="decl-rows-wrap">
+    <div class="decl-row">
+      <div class="decl-q">Declined your insurance?</div>
+      <div class="decl-sel"><select name="ins_declined"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
+    <div class="decl-row decl-row-alt">
+      <div class="decl-q">Imposed special terms?</div>
+      <div class="decl-sel"><select name="ins_terms"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
+    <div class="decl-row">
+      <div class="decl-q">Refused to renew your policy?</div>
+      <div class="decl-sel"><select name="ins_renew"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
+    <div class="decl-row decl-row-alt">
+      <div class="decl-q">Cancelled your policy?</div>
+      <div class="decl-sel"><select name="ins_cancel"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
+    <div class="decl-row">
+      <div class="decl-q">Voided any policy?</div>
+      <div class="decl-sel"><select name="ins_void"><option value=""></option><option>No</option><option>Yes</option></select></div>
+    </div>
+  </div>
+  <div class="grid" style="margin-top:6px">
+    <div class="field full"><div class="lbl">If yes - reason</div><div class="ctrl"><input type="text" name="ins_reason" placeholder="Provide reason if any of the above is Yes"></div></div>
   </div>
 
   <div style="margin-top:8px"><b style="font-size:9pt">Please provide details of all previous incidents in the past 3 years whether a claim was submitted or not</b></div>
