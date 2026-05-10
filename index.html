@@ -1147,11 +1147,11 @@
   <div class="hint" style="border:none;background:transparent;padding:8px 4px;margin-top:4px">*Contractors All Risk requires a separate application form - please request from your broker.</div>
 
 <div class="banner">Fire - Stock</div>
-  <div class="hint">Cover for stock held on the premises (separate from building cover).</div>
+  <div class="hint">Stock held on the premises - e.g. consumables, finished goods, raw materials.</div>
   <div class="grid">
     <div class="field"><div class="lbl">Stock sum insured</div><div class="ctrl"><input type="text" name="fire_stock_si" placeholder="R"></div></div>
 
-    <div class="field full"><div class="lbl">Type / description of stock</div><div class="ctrl"><input type="text" name="fire_stock_desc" placeholder="e.g. consumables, finished goods, raw materials"></div></div>
+    <div class="field full"><div class="lbl">Type / description of stock</div><div class="ctrl"><input type="text" name="fire_stock_desc" placeholder="e.g. consumables, finished goods, raw materials, merchandise"></div></div>
   </div>
 
   <!-- OFFICE CONTENTS / BI / ACC REC -->
@@ -1230,11 +1230,11 @@
   <div class="note"><b>Important:</b> Please always disclose thatched roofs and lapas (whether attached or freestanding). Insurers verify roof and lapa details against satellite imagery - undisclosed thatched structures cause the entire underwriting process to restart.</div>
 
 <div class="banner">Fire - Miscellaneous</div>
-  <div class="hint">Items not falling under Building or Stock - e.g. external structures, signage, fencing, paving.</div>
+  <div class="hint">Items not under Building or Stock - e.g. external signage, fencing, walls, tenant renovations.</div>
   <div class="grid">
     <div class="field"><div class="lbl">Miscellaneous sum insured</div><div class="ctrl"><input type="text" name="fire_misc_si" placeholder="R"></div></div>
 
-    <div class="field full"><div class="lbl">Description of miscellaneous items</div><div class="ctrl"><input type="text" name="fire_misc_desc" placeholder="e.g. external signage, walls, fencing, tenant renovations"></div></div>
+    <div class="field full"><div class="lbl">Description of miscellaneous items</div><div class="ctrl"><input type="text" name="fire_misc_desc" placeholder="e.g. external signage, fencing, boundary walls, tenant renovations"></div></div>
   </div>
 
 <div class="banner">Office Contents</div>
@@ -1356,7 +1356,7 @@
   </div>
 
 <div class="banner">Goods in Transit</div>
-  <div class="hint">Cover for goods on the road - to and from clients (separate section).</div>
+  <div class="hint">Goods transported by road - e.g. customer deliveries, raw materials, electronic devices. List what you carry.</div>
   <div class="grid">
     <div class="field"><div class="lbl">Annual carryings</div><div class="ctrl"><input type="text" name="git_annual" placeholder="R"></div></div>
     <div class="field"><div class="lbl">Limit any one vehicle</div><div class="ctrl"><input type="text" name="git_limit" placeholder="R"></div></div>
@@ -1365,7 +1365,7 @@
           </select>
     </div></div>
 
-    <div class="field full"><div class="lbl">Description of goods carried</div><div class="ctrl"><input type="text" name="git_desc" placeholder="e.g. customer deliveries, raw materials between sites, electronic devices"></div></div>
+    <div class="field full"><div class="lbl">Description of goods carried</div><div class="ctrl"><input type="text" name="git_desc" placeholder="e.g. customer deliveries, raw materials, electronic devices between sites"></div></div>
   </div>
 
 <div class="banner">Accidental Damage - Building &amp; Inside Premises</div>
@@ -1510,7 +1510,7 @@
       <select name="mb_bi_period"><option value=""></option><option>Not required</option><option>3 months</option><option>6 months</option><option>12 months</option><option value="custom">Custom...</option>
           </select>
     </div></div>
-    <div class="field full"><div class="lbl">Description of machinery</div><div class="ctrl"><input type="text" name="mb_desc" placeholder="e.g. earphones, fridges, compressors, generators, production line equipment"></div></div>
+    <div class="field full"><div class="lbl">Description of machinery</div><div class="ctrl"><input type="text" name="mb_desc" placeholder="e.g. compressors, generators, air conditioners, production line equipment"></div></div>
   </div>
 
   <div class="footer">
@@ -1531,7 +1531,7 @@
   </div>
 
 <div class="banner">Business All Risk</div>
-  <div class="hint">Items that leave the business premises - e.g. tools, laptops, work mobile phones. List each item separately.</div>
+  <div class="hint">Items that leave the business premises - e.g. tools, laptops, cell phones. Describe each item with make and model.</div>
   <div id="allrisk-list">
     <div class="allrisk-item">
       <div class="sub-head">Item<span class="num">1</span></div>
@@ -1548,7 +1548,7 @@
           </select>
         </div></div>
         <div class="field"><div class="lbl">Item sum insured</div><div class="ctrl"><input type="text" name="ar_sum[]" placeholder="R"></div></div>
-        <div class="field full"><div class="lbl">Description</div><div class="ctrl"><input type="text" name="ar_desc[]" placeholder="e.g. Makita drill set, Lenovo laptop serial XYZ"></div></div>
+        <div class="field full"><div class="lbl">Description</div><div class="ctrl"><input type="text" name="ar_desc[]" placeholder="e.g. Makita 18V drill, Dell XPS 15 laptop, Samsung work phone"></div></div>
         <div class="field"><div class="lbl">Serial number</div><div class="ctrl"><input type="text" name="ar_serial[]" placeholder="If applicable"></div></div>
         <div class="field"><div class="lbl">Year acquired</div><div class="ctrl"><input type="text" name="ar_year[]"></div></div>
       </div>
@@ -1599,7 +1599,7 @@
           </select>
         </div></div>
         <div class="field"><div class="lbl">Item sum insured</div><div class="ctrl"><input type="text" name="par_si[]" placeholder="R"></div></div>
-        <div class="field full"><div class="lbl">Description</div><div class="ctrl"><input type="text" name="par_desc[]" placeholder="e.g. Apple iPhone 15 Pro 256GB, Diamond ring 1.5ct"></div></div>
+        <div class="field full"><div class="lbl">Description</div><div class="ctrl"><input type="text" name="par_desc[]" placeholder="e.g. Apple MacBook laptop, iPhone 15 Pro, diamond ring 1.5ct, Rolex watch"></div></div>
         <div class="field"><div class="lbl">Serial / IMEI</div><div class="ctrl"><input type="text" name="par_serial[]" placeholder="If applicable"></div></div>
         <div class="field"><div class="lbl">Year acquired</div><div class="ctrl"><input type="number" name="par_year[]" min="1990" max="2030"></div></div>
       </div>
@@ -1629,7 +1629,7 @@
   </div>
 
 <div class="banner">Electronic Equipment</div>
-  <div class="hint">List each item of electronic equipment requiring cover. Click "+ Add another electronic item" to add more.</div>
+  <div class="hint">List each item with make, model and serial number - e.g. CCTV, computers, printers, PABX systems, servers, TVs.</div>
   <div id="electronic-list">
     <div class="electronic-item">
       <div class="sub-head">Item<span class="num">1</span></div>
@@ -1648,7 +1648,7 @@
           </select>
         </div></div>
         <div class="field"><div class="lbl">Sum insured</div><div class="ctrl"><input type="text" name="ee_sum[]" placeholder="R"></div></div>
-        <div class="field full"><div class="lbl">Description (make / model)</div><div class="ctrl"><input type="text" name="ee_desc[]" placeholder="e.g. Apple iPhone 15 Pro 256GB"></div></div>
+        <div class="field full"><div class="lbl">Description (make / model)</div><div class="ctrl"><input type="text" name="ee_desc[]" placeholder="e.g. HP LaserJet Pro M428, Hikvision 8ch DVR, Dell OptiPlex 7090"></div></div>
         <div class="field"><div class="lbl">Serial / IMEI number</div><div class="ctrl"><input type="text" name="ee_serial1[]"></div></div>
         <div class="field"><div class="lbl">Serial / IMEI number 2</div><div class="ctrl"><input type="text" name="ee_serial2[]"></div></div>
       </div>
