@@ -1239,6 +1239,65 @@
     <div class="field full"><div class="lbl">Description of miscellaneous items</div><div class="ctrl"><input type="text" name="fire_misc_desc" placeholder="e.g. external signage, fencing, boundary walls, tenant renovations"></div></div>
   </div>
 
+<div class="banner">Building</div>
+  <div class="hint">Cover for the building structure - walls, roof, fixtures and permanent fittings. Separate from stock, contents and miscellaneous.</div>
+  <div class="grid">
+    <div class="field"><div class="lbl">Building sum insured</div><div class="ctrl"><input type="text" name="bldg_si" placeholder="R"></div></div>
+    <div class="field"><div class="lbl">Bond holder</div><div class="ctrl"><input type="text" name="bldg_bond_holder"></div></div>
+    <div class="field"><div class="lbl">Number of geysers</div><div class="ctrl"><input type="number" name="bldg_geysers" placeholder="0" min="0"></div></div>
+    <div class="field"><div class="lbl">Power surge cover</div><div class="ctrl">
+      <select name="bldg_power_surge">
+        <option value=""></option>
+        <option>Yes</option>
+        <option>No</option>
+        <option value="custom">Custom...</option>
+      </select>
+    </div></div>
+    <div class="field"><div class="lbl">Year built</div><div class="ctrl"><input type="number" name="bldg_year_built" placeholder="e.g. 1998" min="1800" max="2100"></div></div>
+    <div class="field"><div class="lbl">Roof type</div><div class="ctrl">
+      <select name="bldg_roof_type">
+        <option value=""></option>
+        <option>Tiles</option>
+        <option>IBR / Corrugated Iron</option>
+        <option>Concrete / Flat</option>
+        <option>Thatched</option>
+        <option>Fibre Cement</option>
+        <option value="custom">Custom...</option>
+      </select>
+    </div></div>
+    <div class="field"><div class="lbl">Lapa on premises?</div><div class="ctrl">
+      <select name="bldg_lapa">
+        <option value=""></option>
+        <option>Yes</option>
+        <option>No</option>
+        <option>N/A</option>
+        <option value="custom">Custom...</option>
+      </select>
+    </div></div>
+    <div class="field"><div class="lbl">Lapa type</div><div class="ctrl">
+      <select name="bldg_lapa_type">
+        <option value=""></option>
+        <option>N/A</option>
+        <option>Attached - Thatched</option>
+        <option>Attached - Other</option>
+        <option>Freestanding - Thatched</option>
+        <option>Freestanding - Other</option>
+        <option value="custom">Custom...</option>
+      </select>
+    </div></div>
+    <div class="field full"><div class="lbl">Lapa location</div><div class="ctrl">
+      <select name="bldg_lapa_location">
+        <option value=""></option>
+        <option>N/A</option>
+        <option>Attached to building / premises</option>
+        <option>Less than 5 metres from building</option>
+        <option>More than 5 metres from building</option>
+        <option value="custom">Custom...</option>
+      </select>
+    </div></div>
+  </div>
+  <div class="note"><b>Important:</b> Always disclose thatched roofs and lapas (whether attached or freestanding). Insurers verify roof and lapa details against satellite imagery - undisclosed thatched structures cause the entire underwriting process to restart.</div>
+
 <div class="banner">Office Contents</div>
   <div class="grid">
     <div class="field"><div class="lbl">Office contents sum insured</div><div class="ctrl"><input type="text" name="oc_si" placeholder="R"></div></div>
