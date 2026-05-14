@@ -137,21 +137,21 @@
   .page > .footer{
     position:absolute;
     left:12mm;right:12mm;
-    bottom:24mm;
+    bottom:20mm;
     margin-top:0;
   }
-  /* Spacer prevents content overlapping the absolute footer */
+  /* Spacer = footer height (~15mm) + bottom offset (20mm) + buffer (5mm) = 40mm */
   .page::after{
-    content:"";display:block;height:22mm;
+    content:"";display:block;height:40mm;
   }
-  /* Overflow pages - footer stays absolute at bottom of grown page */
+  /* Overflow pages - same footer position */
   .page.overflow-warning{min-height:297mm}
   .page.overflow-warning > .footer{
     position:absolute;
     left:12mm;right:12mm;
-    bottom:8mm;
+    bottom:20mm;
   }
-  .page.overflow-warning::after{height:22mm}
+  .page.overflow-warning::after{height:40mm}
 
   /* A4 page-break indicator */
   .a4-page-break-indicator{
