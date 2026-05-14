@@ -129,21 +129,29 @@
     padding:12mm 12mm 8mm;
     border-radius:var(--r-lg);
     box-shadow:var(--shadow-lg);
+    position:relative;
     box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
+    overflow:hidden;
   }
-  /* Content area grows to push footer to bottom */
-  .page > .top{flex-shrink:0}
+  /* Footer always pinned to exact bottom of each page */
   .page > .footer{
-    flex-shrink:0;
-    margin-top:auto;
-    padding-top:8mm;
+    position:absolute;
+    left:12mm;right:12mm;
+    bottom:8mm;
+    margin-top:0;
   }
-  .page::after{display:none}
-
-  /* Overflow pages behave identically */
+  /* Spacer pushes content up so it never overlaps the footer */
+  .page::after{
+    content:"";display:block;height:42mm;
+  }
+  /* Overflow pages - footer stays absolute at bottom of grown page */
   .page.overflow-warning{min-height:297mm}
+  .page.overflow-warning > .footer{
+    position:absolute;
+    left:12mm;right:12mm;
+    bottom:8mm;
+  }
+  .page.overflow-warning::after{height:42mm}
 
   /* A4 page-break indicator */
   .a4-page-break-indicator{
@@ -2804,9 +2812,9 @@ async function downloadPDF(){
         ? Math.round((topEl.getBoundingClientRect().bottom - pageRect.top + 4) * captureScale)
         : Math.round(50 * captureScale);
 
-      // Footer starts at .footer top minus its 22px margin-top (the gap before it)
+      // Footer strip starts at the footer element's top edge
       let footerStartY = footEl
-        ? Math.round((footEl.getBoundingClientRect().top - pageRect.top - 22) * captureScale)
+        ? Math.round((footEl.getBoundingClientRect().top - pageRect.top) * captureScale)
         : fullCanvas.height - Math.round(72 * captureScale);
 
       // Clamp to valid range
