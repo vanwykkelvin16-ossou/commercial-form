@@ -2894,6 +2894,28 @@ async function downloadPDF(){
       });
       breakPts.sort((a, b) => a.y - b.y);
 
+      // Collect no-split zones: blocks that must never be cut across pages.
+      // Each zone = { top, bot } in content-relative pixels.
+      const noSplitZones = [];
+      const noSplitSelectors = [
+        '.sig-block', '.sig-meta',           // signature + name/capacity/date
+        '.premises-item', '.allrisk-item',   // repeating item rows
+        '.vehicle-item', '.par-item',
+        '.electronic-item',
+        '.grid',                             // any field grid
+        '.declaration',                      // declaration text block
+        '.note',                             // note/info blocks
+      ];
+      cloned.querySelectorAll(noSplitSelectors.join(',')).forEach(el => {
+        const r = el.getBoundingClientRect();
+        const top = Math.round((r.top  - pageRect.top) * captureScale - headerEndY);
+        const bot = Math.round((r.bottom - pageRect.top) * captureScale - headerEndY);
+        if(top >= 0 && bot > top && (bot - top) < slotH * 0.92){
+          // Only protect blocks that actually fit on a single page
+          noSplitZones.push({ top, bot });
+        }
+      });
+
       let srcY = 0; // current position within content region
       while(srcY < contentH){
         const remaining = contentH - srcY;
@@ -2928,6 +2950,23 @@ async function downloadPDF(){
           }
 
           if(best !== null) sliceEnd = best;
+
+          // No-split zone guard: if the chosen cut lands inside a protected block,
+          // pull the cut back to just before that block's top.
+          // Repeat until no zone is violated (zones can be nested).
+          let changed = true;
+          while(changed){
+            changed = false;
+            for(const zone of noSplitZones){
+              if(zone.top > srcY && zone.top < sliceEnd && zone.bot > sliceEnd){
+                // Cut would slice through this zone — pull back to zone.top
+                sliceEnd = zone.top;
+                changed = true;
+              }
+            }
+          }
+          // Safety: never produce a zero-height slice (infinite loop guard)
+          if(sliceEnd <= srcY) sliceEnd = srcY + Math.min(slotH, remaining);
         }
 
         const sliceH = sliceEnd - srcY;
