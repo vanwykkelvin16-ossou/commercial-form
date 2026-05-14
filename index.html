@@ -2784,6 +2784,8 @@ async function downloadPDF(){
     const captureScale = 2;
     // Exact A4 canvas height at captureScale=2, width=794px
     const a4H = Math.round(A4_WIDTH_PX * captureScale * pdfH_mm / pdfW_mm); // ≈ 2245 px
+    // Bottom gap for footer in PDF (pixels at captureScale=2; ~8mm from page edge)
+    const PDF_FOOTER_BOTTOM_GAP = Math.round(A4_WIDTH_PX * captureScale / pdfW_mm * 8); // ≈8mm
 
     let isFirstPdfPage = true;
     const pages = document.querySelectorAll('.page');
@@ -2868,8 +2870,8 @@ async function downloadPDF(){
         ctx.drawImage(headerCanvas, 0, 0);
         // Content immediately below header
         if(contentH > 0) ctx.drawImage(sliceCanvas(fullCanvas, headerEndY, contentH), 0, headerEndY);
-        // Footer pinned to the bottom of the A4
-        ctx.drawImage(footerCanvas, 0, a4H - footerCanvas.height);
+        // Footer pinned near the bottom of the A4 with a small bottom margin
+        ctx.drawImage(footerCanvas, 0, a4H - footerCanvas.height - PDF_FOOTER_BOTTOM_GAP);
 
         if(!isFirstPdfPage) pdf.addPage();
         isFirstPdfPage = false;
@@ -2940,7 +2942,7 @@ async function downloadPDF(){
         ctx.fillRect(0, 0, W, a4H);
         ctx.drawImage(headerCanvas, 0, 0);                     // logo header at top
         ctx.drawImage(contentSlice, 0, headerCanvas.height);   // section content
-        ctx.drawImage(footerCanvas, 0, a4H - footerCanvas.height); // footer at bottom
+        ctx.drawImage(footerCanvas, 0, a4H - footerCanvas.height - PDF_FOOTER_BOTTOM_GAP); // footer near bottom with margin
 
         if(!isFirstPdfPage) pdf.addPage();
         isFirstPdfPage = false;
