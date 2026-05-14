@@ -129,29 +129,21 @@
     padding:12mm 12mm 8mm;
     border-radius:var(--r-lg);
     box-shadow:var(--shadow-lg);
-    position:relative;
     box-sizing:border-box;
-    overflow:hidden;
+    display:flex;
+    flex-direction:column;
   }
-  /* Footer absolute-positioned at A4 bottom */
+  /* Content area grows to push footer to bottom */
+  .page > .top{flex-shrink:0}
   .page > .footer{
-    position:absolute;
-    left:12mm;right:12mm;
-    bottom:8mm;
-    margin-top:0;
+    flex-shrink:0;
+    margin-top:auto;
+    padding-top:8mm;
   }
-  .page::after{
-    content:"";display:block;height:36mm;
-  }
+  .page::after{display:none}
 
-  /* Overflow handling — page grows naturally, footer stacks below content */
+  /* Overflow pages behave identically */
   .page.overflow-warning{min-height:297mm}
-  .page.overflow-warning > .footer{
-    position:static;
-    left:auto;right:auto;bottom:auto;
-    margin-top:18px;
-  }
-  .page.overflow-warning::after{height:0}
 
   /* A4 page-break indicator */
   .a4-page-break-indicator{
