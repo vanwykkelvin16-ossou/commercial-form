@@ -2784,8 +2784,8 @@ async function downloadPDF(){
     const captureScale = 2;
     // Exact A4 canvas height at captureScale=2, width=794px
     const a4H = Math.round(A4_WIDTH_PX * captureScale * pdfH_mm / pdfW_mm); // ≈ 2245 px
-    // Bottom gap for footer in PDF (pixels at captureScale=2; ~8mm from page edge)
-    const PDF_FOOTER_BOTTOM_GAP = Math.round(A4_WIDTH_PX * captureScale / pdfW_mm * 8); // ≈8mm
+    // Bottom gap for footer in PDF (pixels at captureScale=2; ~20mm from page edge)
+    const PDF_FOOTER_BOTTOM_GAP = Math.round(A4_WIDTH_PX * captureScale / pdfW_mm * 20); // ≈20mm
 
     let isFirstPdfPage = true;
     const pages = document.querySelectorAll('.page');
