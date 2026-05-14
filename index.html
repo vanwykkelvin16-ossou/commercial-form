@@ -140,9 +140,9 @@
     bottom:8mm;
     margin-top:0;
   }
-  /* Spacer pushes content up so it never overlaps the footer */
+  /* Spacer prevents content overlapping the absolute footer */
   .page::after{
-    content:"";display:block;height:42mm;
+    content:"";display:block;height:22mm;
   }
   /* Overflow pages - footer stays absolute at bottom of grown page */
   .page.overflow-warning{min-height:297mm}
@@ -151,7 +151,7 @@
     left:12mm;right:12mm;
     bottom:8mm;
   }
-  .page.overflow-warning::after{height:42mm}
+  .page.overflow-warning::after{height:22mm}
 
   /* A4 page-break indicator */
   .a4-page-break-indicator{
@@ -2776,14 +2776,19 @@ async function downloadPDF(){
       renderHost.innerHTML = '';
       const cloned = buildPdfReadyClone(pages[i]);
 
-      // Always make footer static so it flows with content and is measurable.
-      // The ::after spacer is killed by shrinking paddingBottom to match the footer's own padding.
+      // Make footer static so it renders in normal flow and can be measured.
       const clonedFooter = cloned.querySelector('.footer');
       if(clonedFooter){
         clonedFooter.style.cssText += ';position:static !important;left:auto !important;'
-          + 'right:auto !important;bottom:auto !important;margin-top:22px !important;';
+          + 'right:auto !important;bottom:auto !important;margin-top:16px !important;';
       }
+      // Kill the ::after spacer so it doesn't inflate the captured canvas height
+      cloned.style.cssText += ';overflow:visible !important;';
+      const noAfter = document.createElement('style');
+      noAfter.textContent = '.page::after{display:none !important;height:0 !important;content:none !important}';
+      cloned.appendChild(noAfter);
       cloned.style.paddingBottom = '8mm';
+      cloned.style.minHeight = '0';
 
       renderHost.appendChild(cloned);
       await new Promise(r => setTimeout(r, 220));
@@ -2812,18 +2817,21 @@ async function downloadPDF(){
         ? Math.round((topEl.getBoundingClientRect().bottom - pageRect.top + 4) * captureScale)
         : Math.round(50 * captureScale);
 
-      // Footer strip starts at the footer element's top edge
+      // Footer: use element's actual measured height (not to end of canvas - avoids ::after bleed)
       let footerStartY = footEl
         ? Math.round((footEl.getBoundingClientRect().top - pageRect.top) * captureScale)
         : fullCanvas.height - Math.round(72 * captureScale);
+      const footerElemH = footEl
+        ? Math.round(footEl.getBoundingClientRect().height * captureScale)
+        : Math.round(60 * captureScale);
 
       // Clamp to valid range
       headerEndY   = Math.max(0, Math.min(headerEndY, fullCanvas.height - 2));
       footerStartY = Math.max(headerEndY + 2, Math.min(footerStartY, fullCanvas.height));
 
-      // Extract the three fixed strips
+      // Extract the three fixed strips - footer uses exact element height only
       const headerCanvas = sliceCanvas(fullCanvas, 0, headerEndY);
-      const footerCanvas = sliceCanvas(fullCanvas, footerStartY, fullCanvas.height - footerStartY);
+      const footerCanvas = sliceCanvas(fullCanvas, footerStartY, footerElemH);
       const contentH     = footerStartY - headerEndY; // total content pixel height
 
       // ---- CASE 1: content fits on one A4 ----
